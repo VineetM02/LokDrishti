@@ -1,0 +1,96 @@
+/* src/components/AuthCard/AuthCard.css */
+.auth-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f2f5; /* Light background for the overall page */
+}
+
+.auth-card-wrapper {
+    display: flex;
+    max-width: 950px; /* Adjust size as needed */
+    width: 90%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 40px 0;
+}
+
+.auth-form-side {
+    flex: 1;
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.auth-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.auth-illustration-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    color: white;
+    text-align: center;
+}
+
+/* Specific background colors for differentiation (optional) */
+.login-bg {
+    background-color: #304FFE; /* Example deep purple */
+}
+.register-bg {
+    background-color: #4CAF50; /* Example green */
+}
+/* You'll put the illustration content here */
+.auth-illustration-side img {
+    max-width: 100%;
+    height: auto;
+}
+
+.auth-illustration-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    
+    /* --- PROFESSIONAL BACKDROP CSS START --- */
+    
+    /* 1. Base Gradient (Deep Blue to Medium Blue) */
+    background: linear-gradient(135deg, #1A237E 0%, #304FFE 100%); 
+    
+    /* 2. Add subtle texture/nodes using radial-gradient (gives a digital, professional look) */
+    background-image: 
+        radial-gradient(circle at 100% 0%, rgba(255, 255, 255, 0.1) 1px, transparent 1%),
+        radial-gradient(circle at 0% 100%, rgba(255, 255, 255, 0.1) 1px, transparent 1%),
+        linear-gradient(135deg, #1A237E 0%, #304FFE 100%);
+    background-size: 8px 8px, 8px 8px, cover;
+    
+    color: white; /* Ensure text is visible */
+}
+
+/* Style for the text content overlay */
+.illustration-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.illustration-subheading {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.5;
+    max-width: 80%; /* keeps text centered and clean */
+    margin: 0 auto;
+}

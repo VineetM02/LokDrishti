@@ -1,0 +1,36 @@
+/* src/components/UserNav/UserNav.css */
+.user-nav {
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px 0;
+}
+
+.profile-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: background-color 0.2s;
+}
+
+.profile-icon-button:hover {
+    background-color: #f0f0f5;
+}
+
+.profile-text {
+    font-size: 1rem;
+    color: #1A237E;
+    font-weight: 500;
+    display: none; /* Hide text on small screens */
+}
+
+/* Show text on larger screens */
+@media (min-width: 768px) {
+    .profile-text {
+        display: inline;
+    }
+}

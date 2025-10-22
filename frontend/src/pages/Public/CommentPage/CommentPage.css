@@ -1,0 +1,125 @@
+/* src/pages/User/CommentsPage/CommentsPage.css */
+.comments-page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f8f8;
+    min-height: 100vh;
+}
+
+.comments-header {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    color: #6a5acd;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.comments-header h1 {
+    font-size: 2rem;
+    color: #1A237E;
+    margin: 0 0 10px 0;
+}
+
+.bill-summary {
+    font-size: 1rem;
+    color: #555;
+}
+
+.comments-section-title {
+    font-size: 1.3rem;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Comment Input Form */
+.new-comment-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+.new-comment-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+/* Comment Card Styling */
+.comment-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    margin-bottom: 15px;
+}
+
+.comment-text-area {
+    flex-grow: 1;
+    max-width: 85%;
+}
+
+.comment-user {
+    font-size: 0.85rem;
+    color: #6a5acd;
+    margin-bottom: 5px;
+}
+
+.comment-text {
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+.comment-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.vote-button {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.2s;
+}
+
+.vote-button:hover {
+    background-color: #f0f0f5;
+}
+
+.vote-button.like { color: #4CAF50; } /* Green for upvote */
+.vote-button.dislike { color: #dc3545; } /* Red for downvote */

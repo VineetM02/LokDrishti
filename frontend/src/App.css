@@ -1,0 +1,64 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* src/App.css (or src/styles/variables.css) */
+
+:root {
+    /* Colors */
+    --color-primary: #1A237E; /* Deep Authority Blue (for titles) */
+    --color-accent: #007bff; /* Vibrant Blue (for buttons, links) */
+    --color-text: #212529; /* Darker, professional text */
+    --color-background: #f9fbfc; /* Very light, cool background */
+    --color-card-bg: white;
+    --color-border: #e9ecef; /* Lighter borders */
+
+    /* Shadows */
+    --shadow-subtle: 0 4px 20px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 8px 30px rgba(0, 0, 0, 0.1);
+
+    /* Typography */
+    --font-family-sans: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-family-sans);
+    background-color: var(--color-background);
+    color: var(--color-text);
+}

@@ -1,0 +1,40 @@
+/* src/components/CustomButton/CustomButton.css */
+.custom-button {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px; /* Slightly more rounded */
+    cursor: pointer;
+    font-size: 1.15rem;
+    font-weight: 700; /* Bolder text */
+    transition: all 0.2s ease;
+    margin-top: 25px;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Slightly deeper shadow */
+}
+
+/* Primary (for User Login/Register) - deep purple/blue from the image */
+.custom-button.primary {
+    background-color: var(--color-accent); 
+    color: white;
+}
+
+.custom-button.primary:hover {
+    background-color: #0056b3; /* Darker accent on hover */
+    transform: translateY(-2px); /* Novel lift effect */
+    box-shadow: var(--shadow-hover);
+}
+
+.custom-button.primary:active {
+    transform: translateY(0);
+}
+
+/* Danger (Optional for Admin Login distinction) */
+.custom-button.danger {
+    background-color: #dc3545; /* Red for admin/warning */
+    color: white;
+}
+
+.custom-button.danger:hover {
+    background-color: #c82333;
+}
