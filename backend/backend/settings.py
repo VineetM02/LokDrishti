@@ -40,11 +40,13 @@ INSTALLED_APPS = [
 
     # third-party
    'rest_framework',
+   'rest_framework.authtoken',
    'corsheaders',
    # local apps
    'api',
    'sentiment',
 ]
+AUTH_USER_MODEL = 'api.User'
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
