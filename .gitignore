@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Django
+*.log
+db.sqlite3
+media/
+staticfiles/
+
+# Virtual environment
+venv/
+.env/
+env/
+
+# VSCode and IDE stuff
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node & React (if you're using React frontend)
+node_modules/
+build/
+dist/
