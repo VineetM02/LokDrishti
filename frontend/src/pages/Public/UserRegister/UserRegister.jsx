@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate} from 'react-router-dom';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+
 // src/pages/Public/UserRegister/UserRegister.jsx
 import AuthCard from '../../../components/AuthCard/AuthCard';
 import InputField from '../../../components/InputField/InputField';
@@ -11,15 +14,37 @@ const UserRegister = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleSubmit = (e) => {
+    const navigate = useNavigate(); // for navigating to login page after register
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (password !== confirmPassword) {
-            alert("Passwords don't match!");
+            toast.error("Passwords don't match!");
             return;
         }
-        console.log('User Register Attempt:', { username, email, password });
-        // Add API call logic here
-    };
+
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/users/register/', {
+            username,
+            email,
+            password,
+            confirm_password: confirmPassword,
+            });
+
+            console.log("Registration response:", response.data);
+            toast.success("Registration successful! Redirecting to login...");
+
+            // Redirect after 1.5s
+            setTimeout(() => {
+            navigate('/login');
+            }, 2000);
+
+        } catch (error) {
+            console.error("Error during registration:", error);
+        }
+        };
+
 
     const formContent = (
         <form onSubmit={handleSubmit}>

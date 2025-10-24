@@ -1,6 +1,8 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+
 import UserLogin from './pages/Public/UserLogin/UserLogin';
 import UserRegister from './pages/Public/UserRegister/UserRegister';
 import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
@@ -32,6 +34,7 @@ function App() {
         {/* <Route path="/home" element={<UserHomePage />} /> */}
         {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
       </Routes>
+      <Toaster position="top-center" reverseOrder={false} />
     </Router>
   );
 }
