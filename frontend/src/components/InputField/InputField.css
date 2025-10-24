@@ -1,0 +1,81 @@
+/* src/components/InputField/InputField.css */
+.input-group {
+    margin-bottom: 25px;
+    width: 100%;
+}
+
+.input-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 5px;
+}
+
+.input-label {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.forgot-link a {
+    font-size: 0.9rem;
+    color: #304FFE; /* Primary color */
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.input-container {
+    position: relative;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #304FFE;
+    box-shadow: 0 0 0 1px #304FFE;
+}
+
+/* Password specific styling */
+.password-container .custom-input {
+    padding-right: 45px; /* Make space for the icon */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #777;
+}
+
+.custom-input {
+    width: 100%;
+    padding: 14px 16px; /* Increased padding for height */
+    border: 1px solid var(--color-border);
+    border-radius: 10px; /* Slightly more rounded */
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: var(--color-accent); 
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1); /* Subtle focus ring */
+    background-color: #fff;
+}
+
+.password-toggle {
+    /* ... */
+    color: #999; /* Softer icon color */
+}
