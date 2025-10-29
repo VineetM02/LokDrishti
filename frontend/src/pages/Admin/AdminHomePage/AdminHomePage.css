@@ -1,0 +1,111 @@
+/* src/pages/Admin/AdminHomePage/AdminHomePage.css */
+
+/* --- Layout: Two-Column Grid --- */
+.admin-home-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr; /* Fixed sidebar width, flexible content */
+    min-height: 100vh;
+}
+
+/* --- Left Sidebar Styling --- */
+.admin-sidebar {
+    background-color: #2F5957; /* Deep blue-green background from the image */
+    padding: 30px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: white;
+}
+
+.profile-button {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 6px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.profile-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.welcome-text h1 {
+    font-size: 2.5rem;
+    font-weight: 300; /* Lighter weight for modern look */
+    line-height: 1.2;
+    margin-bottom: 15px;
+}
+
+.highlight-gov {
+    font-weight: 700;
+    color: #4FD3C4; /* Bright teal accent */
+}
+
+.welcome-text p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 50px;
+}
+
+.manage-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.management-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+
+/* --- Right Content Panel Styling --- */
+.admin-content {
+    background-color: #6c9796; /* Slightly lighter blue-green background from image */
+    padding: 30px 50px;
+}
+
+.content-header-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 30px;
+}
+
+.search-bar-wrapper {
+    margin-bottom: 40px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    color: #454545;
+}
+
+.search-input::placeholder {
+    color: #999;
+}

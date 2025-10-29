@@ -1,0 +1,41 @@
+/* src/components/AdminFormLayout/AdminFormLayout.css */
+.admin-form-container {
+    min-height: 100vh;
+    background-color: #557F7E; /* Matches the AdminHomePage content background */
+    padding: 30px;
+}
+
+.back-to-home-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-to-home-button:hover {
+    color: #4FD3C4; /* Accent color */
+}
+
+.admin-form-card {
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #DDEBEB; /* Very light, cool background for the form area */
+    padding: 40px 60px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.admin-form-title {
+    font-size: 2rem;
+    color: #1C3F71;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(28, 63, 113, 0.1);
+}

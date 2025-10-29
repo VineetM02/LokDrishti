@@ -1,0 +1,94 @@
+/* src/pages/Admin/ManageBills/ManageBills.css - Shared Form Styles */
+
+.manage-bill-form {
+    padding-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 1rem;
+    color: #1C3F71; /* Primary color */
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #B1B4B6; /* Neutral border color */
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    background-color: white;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #00703C; /* Success/Action color on focus */
+    box-shadow: 0 0 0 2px rgba(0, 112, 60, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+/* Submit Button Styling */
+.form-submit-button {
+    width: 100%;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.form-submit-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Specific Colors */
+.add-button {
+    background-color: #00703C; /* Forest Green for Create/Publish */
+}
+.add-button:hover {
+    background-color: #005A30;
+}
+
+.update-button {
+    background-color: #1C3F71; /* Deep Blue for Update/Save */
+}
+.update-button:hover {
+    background-color: #102A4A;
+}
+
+.delete-button {
+    background-color: #D4351C; /* Error Red for Delete/Danger */
+}
+.delete-button:hover {
+    background-color: #A32914;
+}
+
+/* Delete Warning Text */
+.delete-warning {
+    background-color: #FFF0F0;
+    color: #D4351C;
+    border: 1px solid #D4351C;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
