@@ -16,11 +16,11 @@
 /* Primary (for User Login/Register) - deep purple/blue from the image */
 .custom-button.primary {
     background-color: var(--color-accent); 
-    color: white;
+    color: rgb(8, 5, 5);
 }
 
 .custom-button.primary:hover {
-    background-color: #0056b3; /* Darker accent on hover */
+    background-color: #d9eafc; /* Darker accent on hover */
     transform: translateY(-2px); /* Novel lift effect */
     box-shadow: var(--shadow-hover);
 }

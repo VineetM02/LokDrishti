@@ -3,7 +3,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f8f8f8; /* Light background */
+    background-color: #d9eafc; /* Light background */
     min-height: 100vh;
 }
 
@@ -12,13 +12,15 @@
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #eee;
+    background-color: #ffffff;
+    border-radius: 2.5cap;
     margin-bottom: 30px;
     padding-bottom: 10px;
 }
 
 .welcome-title {
     font-size: 1.8rem;
-    color: #1A237E;
+    color:  #1b5b9f;
     font-weight: 700;
 }
 
@@ -31,6 +33,6 @@
     color: #333;
     margin-bottom: 25px;
     font-weight: 500;
-    border-left: 5px solid #6a5acd;
+    border-left: 5px solid #1b5b9f;
     padding-left: 15px;
 }

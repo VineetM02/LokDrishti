@@ -1,0 +1,33 @@
+/* src/components/AdminManagementButton/AdminManagementButton.css */
+.admin-mgmt-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 120px; /* Gives the button height */
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.1); /* Subtle white overlay on the sidebar background */
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s;
+    color: white; /* Text and icon color */
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.admin-mgmt-button:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.mgmt-icon {
+    margin-bottom: 8px;
+    color: #4FD3C4; /* Bright accent for icons */
+}
+
+.mgmt-title {
+    text-align: center;
+    line-height: 1.2;
+}

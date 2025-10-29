@@ -23,7 +23,7 @@
 
 .policy-title {
     font-size: 1.4rem;
-    color: #1A237E; /* Deep blue from professional theme */
+    color: #1b5b9f; /* Deep blue from professional theme */
     margin-bottom: 8px;
     font-weight: 600;
 }
@@ -47,6 +47,6 @@
 
 .comment-count {
     font-size: 0.85rem;
-    color: #6a5acd; /* Primary accent color */
+    color: #0079fb; /* Primary accent color */
     font-weight: 500;
 }

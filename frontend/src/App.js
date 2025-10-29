@@ -10,6 +10,11 @@ import AdminLogin from './pages/Admin/AdminLogin/AdminLogin';
 import UserHomePage from './pages/Public/UserHomePage/UserHomePage';
 import ProfilePage from './pages/Public/ProfilePage/ProfilePage';
 import CommentPage from './pages/Public/CommentPage/CommentPage';
+
+import AdminHomePage from './pages/Admin/AdminHomePage/AdminHomePage';
+import AddBillPage from './pages/Admin/ManageBills/AddBillPage';
+import UpdateBillPage from './pages/Admin/ManageBills/UpdateBillPage';
+import DeleteBillPage from './pages/Admin/ManageBills/DeleteBillPage';
 // ... import other pages (UserHome, AdminHome) when ready
 
 function App() {
@@ -27,12 +32,17 @@ function App() {
         <Route path="/bill/:billId/comments" element={<CommentPage />} /> 
         <Route path="/profile" element={<ProfilePage />} />
 
+        {/* Admin Protected Routes */}
+        <Route path="/admin/home" element={<AdminHomePage />} />
+        <Route path="/admin/manage/add" element={<AddBillPage />} />
+        <Route path="/admin/manage/update" element={<UpdateBillPage />} />
+        <Route path="/admin/manage/delete" element={<DeleteBillPage />} />
+
         {/* Home/Default Redirect */}
         <Route path="/" element={<Navigate to="/login" replace />} />
         
-        {/* Future Protected Routes */}
-        {/* <Route path="/home" element={<UserHomePage />} /> */}
-        {/* <Route path="/admin/dashboard" element={<AdminDashboard />} /> */}
+        {/* Catch-all for 404 Not Found pages */}
+        <Route path="*" element={<h1>404 Not Found pages</h1>} />
       </Routes>
       <Toaster position="top-center" reverseOrder={false} />
     </Router>

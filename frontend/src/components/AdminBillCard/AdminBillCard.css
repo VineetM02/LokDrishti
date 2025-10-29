@@ -1,0 +1,47 @@
+/* src/components/AdminBillCard/AdminBillCard.css */
+.admin-bill-card {
+    position: relative;
+    background-color: #D6EDE4; /* Light mint/teal color from the image */
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+    min-height: 150px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-bill-title {
+    font-size: 1.5rem;
+    color: #1C3F71; /* Primary Slate Blue */
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.admin-bill-details {
+    margin-top: 10px;
+    color: #454545;
+}
+
+.admin-bill-detail {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin: 3px 0;
+}
+
+.dashboard-button-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: white; /* White button look from image */
+    color: #1C3F71;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.2s;
+}
+
+.dashboard-button-overlay:hover {
+    background-color: #F0F0F0;
+}
