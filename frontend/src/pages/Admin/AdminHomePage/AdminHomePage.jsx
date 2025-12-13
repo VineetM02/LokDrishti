@@ -5,6 +5,8 @@ import { FaUserCircle, FaCheckCircle, FaGlobe, FaBolt } from 'react-icons/fa'; /
 import AdminManagementButton from '../../../components/AdminManagementButton/AdminManagementButton';
 import AdminBillCard from '../../../components/AdminBillCard/AdminBillCard';
 import './AdminHomePage.css';
+import { FaSearch } from 'react-icons/fa';
+
 
 // Mock Data
 const mockAdminBills = [
@@ -37,18 +39,12 @@ const AdminHomePage = () => {
                 <div className="logo-section">
                     <span className="logo-text">LokDrishti</span>
                     <button className="profile-button" onClick={handleProfileClick}>
-                        Profile
+                    <FaUserCircle size={22} />
                     </button>
                 </div>
 
-                <div className="welcome-text">
-                    <h1>
-                        Empowering Voices. Enhancing <span className="highlight-gov">Governance.</span>
-                    </h1>
-                    <p>Analyze public sentiment and shape better policies with LokDrishti.</p>
-                </div>
+                <p className="sidebar-section-title">Bill Management</p>
 
-                <h3 className="manage-title">Manage Bill</h3>
                 <div className="management-actions">
                     <AdminManagementButton icon={FaCheckCircle} title="Add Bill" path="/admin/manage/add" />
                     <AdminManagementButton icon={FaGlobe} title="Update Bill" path="/admin/manage/update" />
@@ -56,13 +52,39 @@ const AdminHomePage = () => {
                 </div>
             </div>
 
+
             {/* 2. Right Content Panel (Bill List) */}
             <div className="admin-content">
-                <h2 className="content-header-title">Bills & Policies</h2>
+                <div className="admin-header">
+                    <h2>Policy Monitoring</h2>
+                    <p>Overview of bills and public sentiment activity</p>
+                </div>
+
+                <div className="admin-metrics">
+                    <div className="metric-card">
+                        <span>Total Bills</span>
+                        <strong>{bills.length}</strong>
+                    </div>
+                    <div className="metric-card">
+                        <span>Total Comments</span>
+                        <strong>2750</strong>
+                    </div>
+                    <div className="metric-card">
+                        <span>Active Bills</span>
+                        <strong>1</strong>
+                    </div>
+                </div>
+
                 
                 <div className="search-bar-wrapper">
-                    <input type="text" placeholder="Search for a Bill" className="search-input" />
+                    <input
+                        type="text"
+                        placeholder="Search by bill name"
+                        className="search-input"
+                    />
+                    <span className="search-icon"><FaSearch /></span>
                 </div>
+
 
                 <div className="bill-list">
                     {bills.map(bill => (

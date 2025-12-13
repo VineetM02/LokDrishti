@@ -1,25 +1,32 @@
 /* src/components/AdminBillCard/AdminBillCard.css */
 .admin-bill-card {
-    position: relative;
-    background-color: #D6EDE4; /* Light mint/teal color from the image */
-    border-radius: 15px;
-    padding: 25px;
-    margin-bottom: 25px;
-    min-height: 150px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #FFFBF3;
+  padding: 22px 26px;
+  border-radius: 18px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+  position: relative;
+  max-width: 100%;
+  box-sizing: border-box;
+
 }
+
 
 .admin-bill-title {
-    font-size: 1.5rem;
-    color: #1C3F71; /* Primary Slate Blue */
-    margin-bottom: 15px;
-    font-weight: 700;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 12px;
 }
 
+
 .admin-bill-details {
-    margin-top: 10px;
-    color: #454545;
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+  color: #444;
+  margin-bottom: 16px;
 }
+
 
 .admin-bill-detail {
     font-size: 0.95rem;
@@ -28,20 +35,78 @@
 }
 
 .dashboard-button-overlay {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    background-color: white; /* White button look from image */
-    color: #1C3F71;
-    border: none;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.2s;
+  background-color: #F5B700;
+  color: #1f1f1f;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .dashboard-button-overlay:hover {
-    background-color: #F0F0F0;
+  background-color: #E0A800;
+}
+
+
+.bill-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bill-metrics {
+  display: flex;
+  gap: 40px;
+  margin-top: 15px;
+}
+
+.dashboard-cta {
+  margin-top: 20px;
+  background: #ffc857;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dashboard-cta:hover {
+  background-color: #E0A800;
+  transform: translateY(-1px);
+}
+
+.bill-status {
+  position: absolute;
+  top: 22px;
+  right: 26px;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: #e7f6ec;
+  color: #1a7f37;
+}
+
+.search-input {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.bill-status {
+  font-weight: 600;
+}
+
+.bill-status.Active {
+  background-color: #E7F6EC;
+  color: #1A7F37;
+}
+
+.bill-status.Draft {
+  background-color: #FFF4E0;
+  color: #A66A00;
+}
+
+.bill-status.Closed {
+  background-color: #FDEAEA;
+  color: #8B0000;
 }
