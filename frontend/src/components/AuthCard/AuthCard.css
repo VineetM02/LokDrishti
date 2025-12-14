@@ -13,7 +13,9 @@
     width: 90%;
     background-color: white;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.12),
+    0 10px 25px rgba(0, 0, 0, 0.08);
     overflow: hidden;
     margin: 40px 0;
 }
@@ -30,7 +32,34 @@
     font-size: 2.5rem;
     font-weight: 600;
     margin-bottom: 30px;
+    font-size: 2.2rem;
 }
+.auth-title::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: #304FFE;
+  margin-top: 10px;
+  border-radius: 2px;
+}
+
+.auth-footer-text a {
+  color: #304FFE;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer-text a:hover {
+  text-decoration: underline;
+}
+
+.auth-divider {
+  height: 1px;
+  background: #eee;
+  margin: 25px 0 15px;
+}
+
 
 .auth-illustration-side {
     flex: 1;
@@ -93,4 +122,73 @@
     line-height: 1.5;
     max-width: 80%; /* keeps text centered and clean */
     margin: 0 auto;
+}
+
+.auth-trust-text {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.illustration-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+
+/* ADMIN CSS */
+.admin-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #111;
+  display: block;
+}
+
+.admin-subtitle {
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 10px;
+  line-height: 1.4;
+}
+
+
+
+.admin-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #ffebee;
+}
+
+.admin-feature-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 25px;
+  font-size: 0.9rem;
+}
+
+.admin-feature-list li {
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.admin-security-note {
+  font-size: 0.8rem;
+  color: #777;
+  text-align: center;
+  margin-top: 12px;
+}
+
+
+.admin-illustration-text {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: 10px;
 }

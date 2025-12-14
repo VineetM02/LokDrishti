@@ -15,15 +15,15 @@
 
 /* Primary (for User Login/Register) - deep purple/blue from the image */
 .custom-button.primary {
-    background-color: var(--color-accent); 
-    color: rgb(8, 5, 5);
+  background: linear-gradient(135deg, #304FFE, #1A237E);
+  color: #fff;
 }
 
 .custom-button.primary:hover {
-    background-color: #d9eafc; /* Darker accent on hover */
-    transform: translateY(-2px); /* Novel lift effect */
-    box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(48, 79, 254, 0.3);
 }
+
 
 .custom-button.primary:active {
     transform: translateY(0);
@@ -31,10 +31,28 @@
 
 /* Danger (Optional for Admin Login distinction) */
 .custom-button.danger {
-    background-color: #dc3545; /* Red for admin/warning */
-    color: white;
+  background: linear-gradient(135deg, #d32f2f, #b71c1c);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(183, 28, 28, 0.4);
 }
 
 .custom-button.danger:hover {
-    background-color: #c82333;
+  transform: translateY(-1px);
+  box-shadow: 0 12px 25px rgba(183, 28, 28, 0.55);
+}
+
+.custom-input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-size: 1rem;
+  background-color: #f8f9fc;
+  border: 1px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.custom-input:focus {
+  background-color: #fff;
+  border-color: #304FFE;
+  box-shadow: 0 8px 20px rgba(48, 79, 254, 0.15);
 }

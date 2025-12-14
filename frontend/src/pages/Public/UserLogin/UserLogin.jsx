@@ -57,26 +57,41 @@ const UserLogin = () => {
                 required 
             />
             
-            <CustomButton type="submit">Login</CustomButton>
+            <CustomButton type="submit">
+                Login to LokDrishti
+            </CustomButton>
+
+            <div className="auth-divider" />
+
+            <p className="auth-trust-text">
+                🔒 LokDrishti ensures secure handling of citizen feedback for policy analysis only.
+            </p>
+
+            <div className="auth-divider" />
 
             <p className="auth-footer-text">
-                Don't have an account? <Link to="/register">Sign up</Link>
+                New to LokDrishti? <Link to="/register">Create a citizen account</Link>
             </p>
+
         </form>
     );
 
     const illustrationContent = (
         <div className="illustration-text-container">
-            <h2 className="illustration-heading">Welcome Back!</h2>
+            <div className="illustration-icon">🏛️</div>
+
+            <h2 className="illustration-heading">Your Voice Matters</h2>
+
             <p className="illustration-subheading">
-                Log in to Lokdrishti to share your opinion on Bills and Policies.
+                Log in to view government bills, share your opinion, and contribute to transparent governance.
             </p>
         </div>
+
     );
 
     return (
         <AuthCard 
-            title="Login" 
+            title="Citizen Login" 
             formContent={formContent} 
             illustrationContent={illustrationContent} 
             isLoginForm={true} 

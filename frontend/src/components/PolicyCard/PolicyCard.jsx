@@ -1,32 +1,32 @@
-// src/components/PolicyCard/PolicyCard.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import CustomButton from '../CustomButton/CustomButton';
 import './PolicyCard.css';
 
 const PolicyCard = ({ bill }) => {
     const navigate = useNavigate();
 
-    const handleCommentClick = () => {
-        // Navigate to the comments page, passing the bill ID
-        navigate(`/bill/${bill.id}/comments`);
-    };
-
     return (
         <div className="policy-card">
-            <div className="policy-content">
+            <div className="policy-header">
                 <h3 className="policy-title">{bill.title}</h3>
-                <p className="policy-description">{bill.description}</p>
+                <span className="status-badge active">Active</span>
             </div>
-            <div className="policy-actions">
-                {/* Shows how many comments already exist */}
-                <p className="comment-count">{bill.commentCount} comments</p>
-                <CustomButton 
-                    onClick={handleCommentClick}
-                    style={{ width: '150px', padding: '10px 15px', margin: '0' }}
+
+            <p className="policy-description">
+                {bill.description}
+            </p>
+
+            <div className="policy-footer">
+                <span className="comment-count">
+                    💬 {bill.commentCount} Comments
+                </span>
+
+                <button
+                    className="comment-btn"
+                    onClick={() => navigate(`/bill/${bill.id}/comments`)}
                 >
-                    Comment
-                </CustomButton>
+                    Comment →
+                </button>
             </div>
         </div>
     );

@@ -11,3 +11,52 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* 1. Reset & Box Model */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* 2. Base HTML & Body */
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #F1F5F9;
+    color: #0B3C5D;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* === BREAKPOINTS === */
+
+/* Mobile */
+@media (max-width: 640px) {
+    html {
+        font-size: 15px;
+    }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    html {
+        font-size: 15.5px;
+    }
+}
+
+/* Laptop */
+@media (max-width: 1024px) {
+    html {
+        font-size: 16px;
+    }
+}

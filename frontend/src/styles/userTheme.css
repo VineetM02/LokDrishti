@@ -1,0 +1,32 @@
+:root {
+  /* BRAND */
+  --primary: #1a237e;
+  --primary-light: #3949ab;
+  --primary-soft: #e8ebff;
+
+  /* SURFACES */
+  --surface-1: #ffffff;
+  --surface-2: #f6f8ff;
+  --surface-3: #eef2ff;
+
+  /* TEXT */
+  --text-main: #1c1f3a;
+  --text-muted: #6b6f91;
+
+  /* BORDERS & SHADOWS */
+  --border-soft: #e3e7ff;
+  --shadow-soft:
+    0 12px 30px rgba(26,35,126,0.08),
+    0 2px 6px rgba(0,0,0,0.04);
+}
+
+.card {
+  background: var(--surface-1);
+  border-radius: 16px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.card-soft {
+  background: var(--surface-2);
+}

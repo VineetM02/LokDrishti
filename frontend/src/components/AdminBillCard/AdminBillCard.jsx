@@ -13,27 +13,34 @@ const AdminBillCard = ({ bill }) => {
         navigate(`/admin/dashboard/${bill.id}`);
     };
     
-    // Mock details for the card
-    const details = [
-        `Status: ${bill.status}`,
-        `Posted: ${bill.postedDate}`,
-        `Comments: ${bill.commentCount}`,
-    ];
 
     return (
         <div className="admin-bill-card">
-            <h3 className="admin-bill-title">{bill.title}</h3>
-            
-            <div className="admin-bill-details">
-                {details.map((detail, index) => (
-                    <p key={index} className="admin-bill-detail">{detail}</p>
-                ))}
+            <div className="bill-header">
+                <h3>{bill.title}</h3>
+                <span className={`bill-status ${bill.status}`}>
+                {bill.status}
+                </span>
             </div>
 
-            <button onClick={handleDashboardClick} className="dashboard-button-overlay">
-                Dashboard
+            <div className="bill-metrics">
+                <div>
+                <small>Comments</small>
+                <strong>{bill.commentCount}</strong>
+                </div>
+                <div>
+                <small>Posted</small>
+                <strong>{bill.postedDate}</strong>
+                </div>
+            </div>
+
+            <button className="dashboard-cta" onClick={handleDashboardClick}>
+                View Analysis →
             </button>
+
+            
         </div>
+
     );
 };
 

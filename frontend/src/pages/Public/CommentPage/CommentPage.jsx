@@ -1,103 +1,108 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { FaArrowUp, FaArrowDown, FaCommentAlt, FaArrowLeft } from 'react-icons/fa';
-import CustomButton from '../../../components/CustomButton/CustomButton';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { FaArrowLeft, FaCommentAlt, FaUserCircle } from 'react-icons/fa';
 import './CommentPage.css';
 
-// Mock data structure
-const mockComments = [
-    { id: 101, user: 'CitizenX', text: "The data privacy framework is robust but needs clearer guidance on state access.", likes: 45, dislikes: 5 },
-    { id: 102, user: 'PolicyFan', text: "I believe the implementation timeline is too short for a project of this scale.", likes: 12, dislikes: 1 },
-];
-const mockBill = { 
-    id: 'b001', 
-    title: 'Digital Governance and Privacy Act, 2025', 
-    shortDescription: 'A bill concerning data protection, citizen privacy, and the framework for digital public infrastructure.',
+// Mock bill data
+const mockBill = {
+  title: 'Digital Governance and Privacy Act, 2025',
+  description:
+    'This bill aims to regulate digital governance frameworks, ensure data privacy, and define state access protocols.',
 };
 
-const CommentsPage = () => {
-    const { billId } = useParams();
-    const navigate = useNavigate();
-    const [bill, setBill] = useState(null);
-    const [comments, setComments] = useState([]);
-    const [newCommentText, setNewCommentText] = useState('');
+// Mock comments
+const mockComments = [
+  {
+    id: 1,
+    username: 'CitizenA',
+    text: 'This bill is necessary but needs stronger safeguards.',
+    date: '20 Oct 2024',
+  },
+  {
+    id: 2,
+    username: 'CitizenB',
+    text: 'Concerned about misuse of data without consent.',
+    date: '18 Oct 2024',
+  },
+  {
+    id: 3,
+    username: 'CitizenC',
+    text: 'Concerned about misuse of data without consent.',
+    date: '18 Oct 2024',
+  },
+  {
+    id: 4,
+    username: 'CitizenD',
+    text: 'Concerned about misuse of data without consent.',
+    date: '18 Oct 2024',
+  },
+];
 
-    useEffect(() => {
-        // 1. Fetch Bill details based on billId
-        // In a real app: axios.get(`/api/bills/${billId}`).then(res => setBill(res.data));
-        setBill(mockBill); 
+const CommentPage = () => {
+  const navigate = useNavigate();
+  const [comments, setComments] = useState(mockComments);
+  const [newComment, setNewComment] = useState('');
 
-        // 2. Fetch Comments for the Bill
-        // In a real app: axios.get(`/api/bills/${billId}/comments`).then(res => setComments(res.data));
-        setComments(mockComments);
-    }, [billId]);
+  const handleSubmit = () => {
+    if (!newComment.trim()) return;
 
-    const handleCommentSubmit = (e) => {
-        e.preventDefault();
-        if (!newCommentText.trim()) return;
-
-        const newComment = {
-            id: Date.now(),
-            user: 'CurrentUser', // Replace with logged-in user name
-            text: newCommentText,
-            likes: 0,
-            dislikes: 0
-        };
-        // In a real app: axios.post(`/api/bills/${billId}/comments`, newComment).then(...);
-        setComments([newComment, ...comments]); // Add new comment to the top
-        setNewCommentText('');
+    const comment = {
+      id: Date.now(),
+      username: 'You',
+      text: newComment,
+      date: new Date().toLocaleDateString(),
     };
 
-    if (!bill) {
-        return <div className="loading-state">Loading Bill Details...</div>;
-    }
+    setComments([comment, ...comments]);
+    setNewComment('');
+  };
 
-    return (
-        <div className="comments-page">
-            <header className="comments-header">
-                <button onClick={() => navigate('/home')} className="back-button">
-                    <FaArrowLeft /> Back to Bills
-                </button>
-                <h1>{bill.title}</h1>
-                <p className="bill-summary">{bill.shortDescription}</p>
-            </header>
+  return (
+    <div className="comment-page">
 
-            <main className="comments-content">
-                
-                {/* 1. Comment Input Area */}
-                <form onSubmit={handleCommentSubmit} className="new-comment-form">
-                    <textarea
-                        value={newCommentText}
-                        onChange={(e) => setNewCommentText(e.target.value)}
-                        placeholder="Add your comment on this bill..."
-                        rows="3"
-                        required
-                    ></textarea>
-                    <CustomButton type="submit" style={{ width: '150px' }}>
-                        Post Comment
-                    </CustomButton>
-                </form>
+      {/* HEADER */}
+      <div className="comment-header">
+        <button className="back-btn" onClick={() => navigate('/home')}>
+          <FaArrowLeft /> Back
+        </button>
 
-                {/* 2. List of Existing Comments */}
-                <h3 className="comments-section-title"><FaCommentAlt /> All Citizen Comments ({comments.length})</h3>
-                
-                <div className="comments-list">
-                    {comments.map(comment => (
-                        <div key={comment.id} className="comment-card">
-                            <div className="comment-text-area">
-                                <p className="comment-user">**{comment.user}**</p>
-                                <p className="comment-text">{comment.text}</p>
-                            </div>
-                            <div className="comment-actions">
-                                <button className="vote-button like"><FaArrowUp /> {comment.likes}</button>
-                                <button className="vote-button dislike"><FaArrowDown /> {comment.dislikes}</button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </main>
+        <h1>{mockBill.title}</h1>
+        <p className="bill-description">{mockBill.description}</p>
+      </div>
+
+      {/* MAIN CONTENT */}
+      <div className="comment-container">
+
+        {/* ADD COMMENT */}
+        <div className="add-comment-card">
+          <h3><FaCommentAlt /> Share Your Opinion</h3>
+          <textarea
+            placeholder="Write your comment here..."
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+          />
+          <button onClick={handleSubmit}>Post Comment</button>
         </div>
-    );
+
+        {/* COMMENTS LIST */}
+        <div className="comments-section">
+          <h3>Public Comments ({comments.length})</h3>
+
+          {comments.map(comment => (
+            <div key={comment.id} className="comment-card">
+              <div className="comment-user">
+                <FaUserCircle />
+                <span>{comment.username}</span>
+              </div>
+              <p className="comment-text">“{comment.text}”</p>
+              <span className="comment-date">{comment.date}</span>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </div>
+  );
 };
 
-export default CommentsPage;
+export default CommentPage;
