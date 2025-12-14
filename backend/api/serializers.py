@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
-
+from django.utils.text import slugify
+from  api.models import Bills,Comment
 User=get_user_model()
 
 # added for user table information in db
@@ -33,9 +34,7 @@ class RegisterSerializer(serializers.ModelSerializer):
             email=validated_data['email'],
             password=validated_data['password']
         )
-        return user
-    
-
+        return user   
 # Login 
 class LoginSerializer(serializers.Serializer):
     identifier = serializers.CharField()  # can be username or email
@@ -55,3 +54,21 @@ class LoginSerializer(serializers.Serializer):
         
         data['user'] = user  # attach user object for use in the view
         return data
+
+class BillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Bills
+        fields = '__all__'
+        extra_kwargs = {
+            'slug': {'required': False}
+        }
+
+    def create(self, validated_data):
+        if 'slug' not in validated_data:
+            validated_data['slug'] = slugify(validated_data['title'])
+        return super().create(validated_data)
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Comment
+        fields='__all__'
