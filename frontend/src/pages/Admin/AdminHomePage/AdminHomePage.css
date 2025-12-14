@@ -122,8 +122,6 @@
   pointer-events: none;
 }
 
-
-
 .admin-sidebar {
   width: 260px;
   background: #0b3a53;
@@ -196,4 +194,20 @@
 .stat-card strong {
   font-size: 26px;
   color: #083b52;
+}
+
+
+@media (max-width: 1024px) {
+    .admin-home-layout {
+        flex-direction: column;
+    }
+
+    .admin-sidebar {
+        width: 100%;
+        position: relative;
+    }
+
+    .admin-content {
+        width: 100%;
+    }
 }

@@ -1,36 +1,47 @@
-/* src/components/UserNav/UserNav.css */
 .user-nav {
     display: flex;
-    justify-content: flex-end;
-    padding: 10px 0;
+    align-items: center;
 }
 
+/* PROFILE BUTTON */
 .profile-icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 10px 15px;
-    border-radius: 20px;
-    transition: background-color 0.2s;
+
+    background-color: #F1F5F9;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 999px;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #0B3C5D;
+
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.profile-icon-button svg {
+    color: #1C4ED8;
 }
 
 .profile-icon-button:hover {
-    background-color: #f0f0f5;
+    background-color: #E2E8F0;
+    box-shadow: 0 4px 12px rgba(15, 42, 68, 0.12);
 }
 
+/* TEXT RESPONSIVENESS */
 .profile-text {
-    font-size: 1rem;
-    color: #1b5b9f;
-    font-weight: 500;
-    display: none; /* Hide text on small screens */
+    display: none;
 }
 
-/* Show text on larger screens */
-@media (min-width: 768px) {
+@media (max-width: 640px) {
+    .platform-subtitle {
+        display: none;
+    }
+
     .profile-text {
-        display: inline;
+        display: none;
     }
 }
