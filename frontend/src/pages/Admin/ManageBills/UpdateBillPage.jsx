@@ -1,87 +1,133 @@
 // src/pages/Admin/ManageBills/UpdateBillPage.jsx
-import React, { useState, useEffect } from 'react';
-import AdminFormLayout from '../../../components/AdminFormLayout/AdminFormLayout';
-import './ManageBills.css';
-
-// Mock Data (In a real app, this would be fetched using billId from URL params)
-const mockBillToUpdate = {
-    id: 'a001',
-    title: 'Digital Governance and Privacy Act, 2025',
-    shortDescription: 'Current description text...',
-    fullText: 'The full text content that needs editing...',
-    status: 'active',
-};
+import React, { useState, useEffect } from "react";
+import AdminFormLayout from "../../../components/AdminFormLayout/AdminFormLayout";
+import API from "../../../services/api";
+import { toast } from "react-hot-toast";
+import "./ManageBills.css";
 
 const UpdateBillPage = () => {
-    const [billId, setBillId] = useState(''); // State for selecting the bill
-    const [formData, setFormData] = useState({});
-    const [billLoaded, setBillLoaded] = useState(false);
+  const [bills, setBills] = useState([]);
+  const [selectedSlug, setSelectedSlug] = useState("");
+  const [formData, setFormData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-    // Mock Load Bill (Replace with API GET call)
-    useEffect(() => {
-        if (billId === 'a001') { // Mock loading logic
-            setFormData(mockBillToUpdate);
-            setBillLoaded(true);
-        }
-    }, [billId]);
+  /* ---------------- LOAD ALL BILLS (DROPDOWN) ---------------- */
+  useEffect(() => {
+    API.get("admin/bills/")
+      .then((res) => setBills(res.data))
+      .catch(() => toast.error("Failed to load bills"));
+  }, []);
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+  /* ---------------- LOAD SELECTED BILL ---------------- */
+  useEffect(() => {
+    if (!selectedSlug) return;
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // API Call: PUT/PATCH to /api/admin/bills/a001
-        console.log('Updating Bill:', formData);
-        alert(`Bill ${formData.title} updated successfully!`);
-    };
+    setLoading(true);
+    API.get(`bills/${selectedSlug}/`)
+      .then((res) => {
+        const bill = res.data;
+        setFormData({
+          title: bill.title,
+          description: bill.description,
+          status: bill.status,
+        });
+        setLoading(false);
+      })
+      .catch(() => {
+        toast.error("Failed to load bill details");
+        setLoading(false);
+      });
+  }, [selectedSlug]);
 
-    return (
-        <AdminFormLayout title="Update Existing Policy/Bill" action="update">
-            <div className="bill-select-group form-group">
-                <label>Select Bill to Update</label>
-                {/* In production, this should be a searchable dropdown populated via API GET /api/admin/bills */}
-                <select value={billId} onChange={(e) => setBillId(e.target.value)}>
-                    <option value="">-- Select Bill --</option>
-                    <option value="a001">Digital Governance Act</option>
-                    <option value="a002">National Education Policy</option>
-                </select>
-            </div>
+  /* ---------------- FORM HANDLERS ---------------- */
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
 
-            {billLoaded && (
-                <form onSubmit={handleSubmit} className="manage-bill-form">
-                    <div className="form-group">
-                        <label>Bill Title</label>
-                        <input type="text" name="title" value={formData.title} onChange={handleChange} required />
-                    </div>
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-                    <div className="form-group">
-                        <label>Short Description/Explanation</label>
-                        <textarea name="shortDescription" rows="3" value={formData.shortDescription} onChange={handleChange} required />
-                    </div>
-                    
-                    <div className="form-group">
-                        <label>Full Policy Text</label>
-                        <textarea name="fullText" rows="6" value={formData.fullText} onChange={handleChange} required />
-                    </div>
-                    
-                    <div className="form-group status-group">
-                        <label>Update Status</label>
-                        <select name="status" value={formData.status} onChange={handleChange}>
-                            <option value="draft">Draft</option>
-                            <option value="active">Active (Visible to users)</option>
-                            <option value="closed">Closed (No new comments)</option>
-                        </select>
-                    </div>
-                    
-                    <button type="submit" className="form-submit-button update-button">
-                        Apply Changes
-                    </button>
-                </form>
-            )}
-            {!billLoaded && billId && <p className="loading-message">Loading bill details...</p>}
-        </AdminFormLayout>
-    );
+    try {
+      await API.patch(`bills/${selectedSlug}/`, formData);
+      toast.success("Bill updated successfully");
+    } catch (error) {
+      console.error(error.response?.data);
+      toast.error("Failed to update bill");
+    }
+  };
+
+  return (
+    <AdminFormLayout title="Update Existing Policy / Bill" action="update">
+
+      {/* -------- SELECT BILL -------- */}
+      <div className="bill-select-group form-group">
+        <label>Select Bill to Update</label>
+        <select
+          value={selectedSlug}
+          onChange={(e) => setSelectedSlug(e.target.value)}
+        >
+          <option value="">-- Select Bill --</option>
+          {bills.map((bill) => (
+            <option key={bill.id} value={bill.slug}>
+              {bill.title}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {loading && <p className="loading-message">Loading bill details...</p>}
+
+      {/* -------- UPDATE FORM -------- */}
+      {formData && !loading && (
+        <form onSubmit={handleSubmit} className="manage-bill-form">
+
+          <div className="form-group">
+            <label>Bill Title</label>
+            <input
+              type="text"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              name="description"
+              rows="3"
+              value={formData.description}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group status-group">
+            <label>Status</label>
+            <select
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+            >
+              <option value="draft">Draft</option>
+              <option value="active">Active</option>
+              <option value="deleted">Deleted</option>
+            </select>
+          </div>
+
+          <button type="submit" className="form-submit-button update-button">
+            Apply Changes
+          </button>
+
+        </form>
+      )}
+
+    </AdminFormLayout>
+  );
 };
 
 export default UpdateBillPage;

@@ -15,6 +15,9 @@ import AdminHomePage from './pages/Admin/AdminHomePage/AdminHomePage';
 import AddBillPage from './pages/Admin/ManageBills/AddBillPage';
 import UpdateBillPage from './pages/Admin/ManageBills/UpdateBillPage';
 import DeleteBillPage from './pages/Admin/ManageBills/DeleteBillPage';
+import Dashboard from "./pages/Admin/Dashboard/Dashboard";
+
+import PrivateRoute from './pages/Public/UserLogin/PrivateRoute';
 // ... import other pages (UserHome, AdminHome) when ready
 
 
@@ -30,14 +33,22 @@ function App() {
         {/* User Protected Routes */}
         <Route path="/home" element={<UserHomePage />} />
         {/* Route with dynamic parameter for bill ID */}
-        <Route path="/bill/:billId/comments" element={<CommentPage />} /> 
+        <Route path="/bill/:slug/comments" element={<CommentPage />} />
         <Route path="/profile" element={<ProfilePage />} />
+
+       <Route path="/user/home"
+             element={
+              <PrivateRoute>
+                <UserHomePage/>
+              </PrivateRoute>
+             }/>
 
         {/* Admin Protected Routes */}
         <Route path="/admin/home" element={<AdminHomePage />} />
         <Route path="/admin/manage/add" element={<AddBillPage />} />
         <Route path="/admin/manage/update" element={<UpdateBillPage />} />
         <Route path="/admin/manage/delete" element={<DeleteBillPage />} />
+        <Route path="/admin/dashboard/:slug" element={<Dashboard />} />
 
         {/* Home/Default Redirect */}
         <Route path="/" element={<Navigate to="/login" replace />} />

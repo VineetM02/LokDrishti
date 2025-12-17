@@ -12,6 +12,7 @@ staticfiles/
 
 # Virtual environment
 venv/
+venv311/
 .env/
 env/
 
@@ -27,3 +28,30 @@ Thumbs.db
 node_modules/
 build/
 dist/
+
+backend/sentiment/ML_model
+backend/sentiment
+
+
+
+# ML / NLP models
+*.pt
+*.bin
+*.h5
+*.pkl
+# ML model directory
+sentiment/ML_model/
+
+
+# HuggingFace cache
+.cache/
+huggingface/
+transformers/
+
+# Dataset files
+data/
+datasets/
+*.csv
+*.xlsx
+
+

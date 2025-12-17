@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+// src/pages/Public/ProfilePage/ProfilePage.jsx
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   FaUserCircle,
@@ -6,40 +7,31 @@ import {
   FaArrowLeft,
   FaCommentDots
 } from 'react-icons/fa';
+import API from '../../../services/api';
 import './ProfilePage.css';
-
-const mockUserData = {
-  username: 'CitizenX_Lokdrishti',
-  email: 'user.citizenx@example.com',
-  memberSince: 'Jan 2024',
-  totalComments: 15,
-};
-
-const mockCommentHistory = [
-  {
-    id: 1,
-    bill: 'Digital Governance and Privacy Act, 2025',
-    text: 'Needs clearer guidance on state access.',
-    date: '20 Oct 2024'
-  },
-  {
-    id: 2,
-    bill: 'Urban Renewal and Infrastructure Funding Bill',
-    text: 'Strong support for sustainable transport initiatives.',
-    date: '15 Sep 2024'
-  },
-  {
-    id: 3,
-    bill: 'Digital Governance and Privacy Act, 2025',
-    text: 'Needs clearer guidance on state access.',
-    date: '20 Oct 2024'
-  },
-];
 
 const ProfilePage = () => {
   const navigate = useNavigate();
-  const [user] = useState(mockUserData);
-  const [comments] = useState(mockCommentHistory);
+
+  const [user, setUser] = useState(null);
+  const [comments, setComments] = useState([]);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (!storedUser) {
+      navigate("/login");
+      return;
+    }
+
+    setUser(storedUser);
+
+    API.get(`users/${storedUser.id}/comments/`)
+      .then(res => setComments(res.data))
+      .catch(err => console.error("Failed to load comments", err));
+  }, [navigate]);
+
+  if (!user) return null;
 
   return (
     <div className="profile-root">
@@ -60,12 +52,8 @@ const ProfilePage = () => {
 
         <div className="hero-stats">
           <div className="stat-card">
-            <span className="stat-value">{user.totalComments}</span>
+            <span className="stat-value">{comments.length}</span>
             <span className="stat-label">Total Comments</span>
-          </div>
-          <div className="stat-card">
-            <span className="stat-value">{user.memberSince}</span>
-            <span className="stat-label">Member Since</span>
           </div>
         </div>
       </div>
@@ -74,12 +62,18 @@ const ProfilePage = () => {
       <div className="activity-section">
         <h2><FaCommentDots /> Participation History</h2>
 
+        {comments.length === 0 && (
+          <p>No comments posted yet.</p>
+        )}
+
         {comments.map(c => (
           <div key={c.id} className="activity-item">
             <div className="activity-content">
-              <h4>{c.bill}</h4>
+              <h4>{c.bill_title}</h4>
               <p>“{c.text}”</p>
-              <span>{c.date}</span>
+              <span>
+                {new Date(c.created_at).toLocaleDateString()}
+              </span>
             </div>
           </div>
         ))}
