@@ -2,20 +2,39 @@
 import React, { useState, useEffect } from 'react';
 import UserNav from '../../../components/UserNav/UserNav';
 import PolicyCard from '../../../components/PolicyCard/PolicyCard';
+import { getBills, getPublicStats} from '../../../services/api';
 import './UserHomePage.css';
-
-const mockBills = [
-    { id: 'b001', title: 'Digital Governance and Privacy Act, 2025', description: 'A bill concerning data protection, citizen privacy, and digital public infrastructure.', commentCount: 450 },
-    { id: 'b002', title: 'Urban Renewal and Infrastructure Funding Bill', description: 'Legislation for smart cities and sustainable urban development.', commentCount: 120 },
-    { id: 'b003', title: 'National Education Curriculum Reform Policy', description: 'Policy reform focused on vocational and digital education.', commentCount: 890 },
-];
 
 const UserHomePage = () => {
     const [bills, setBills] = useState([]);
+    const [totalComments, setTotalComments] = useState(0);
+    const [participants, setParticipants] = useState(0);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
-        setBills(mockBills);
+        getBills()
+            .then((res) => {
+                setBills(res.data);
+            })
+            .catch((err) => {
+                console.error("Error fetching bills:", err);
+            });
+
+        getPublicStats()
+            .then((res) => {
+                setTotalComments(res.data.total_comments);
+                setParticipants(res.data.citizen_participants);
+            })
+            .catch((err) => {
+                console.error("Error fetching stats:", err);
+            });
     }, []);
+
+    const filteredBills = bills.filter((bill) =>
+        bill.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        bill.description.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
 
     return (
         <div className="user-home">
@@ -24,7 +43,9 @@ const UserHomePage = () => {
                 <div className="user-header-inner container">
                     <div className="user-header-left">
                         <h1 className="platform-title">LokDrishti</h1>
-                        <span className="platform-subtitle">Public Policy Consultation</span>
+                        <span className="platform-subtitle">
+                            Public Policy Consultation
+                        </span>
                     </div>
                     <UserNav />
                 </div>
@@ -38,8 +59,13 @@ const UserHomePage = () => {
                 </p>
 
                 <div className="search-box">
-                    <input type="text" placeholder="Search bills, policies, acts..." />
-                    <button>Search</button>
+                    <input
+                        type="text"
+                        placeholder="Search bills, policies, acts..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                    {/* <button>Search</button> */}
                 </div>
             </section>
 
@@ -47,15 +73,17 @@ const UserHomePage = () => {
             <section className="stats-section">
                 <div className="stat-card">
                     <h3>Active Bills</h3>
-                    <span>12</span>
+                    <span>{bills.length}</span>
                 </div>
+
                 <div className="stat-card">
                     <h3>Total Comments</h3>
-                    <span>4,320</span>
+                    <span>{totalComments}</span>
                 </div>
+
                 <div className="stat-card">
                     <h3>Citizen Participants</h3>
-                    <span>1,180</span>
+                    <span>{participants}</span>
                 </div>
             </section>
 
@@ -64,7 +92,7 @@ const UserHomePage = () => {
                 <h2>Open for Public Consultation</h2>
 
                 <div className="policy-grid">
-                    {bills.map(bill => (
+                    {filteredBills.map((bill) => (
                         <PolicyCard key={bill.id} bill={bill} />
                     ))}
                 </div>

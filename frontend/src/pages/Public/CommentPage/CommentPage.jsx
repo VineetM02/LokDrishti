@@ -1,61 +1,37 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// src/pages/Public/CommentPage/CommentPage.jsx
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FaArrowLeft, FaCommentAlt, FaUserCircle } from 'react-icons/fa';
+import {
+  getBillDetail,
+  getBillComments,
+  addComment
+} from '../../../services/api';
 import './CommentPage.css';
-
-// Mock bill data
-const mockBill = {
-  title: 'Digital Governance and Privacy Act, 2025',
-  description:
-    'This bill aims to regulate digital governance frameworks, ensure data privacy, and define state access protocols.',
-};
-
-// Mock comments
-const mockComments = [
-  {
-    id: 1,
-    username: 'CitizenA',
-    text: 'This bill is necessary but needs stronger safeguards.',
-    date: '20 Oct 2024',
-  },
-  {
-    id: 2,
-    username: 'CitizenB',
-    text: 'Concerned about misuse of data without consent.',
-    date: '18 Oct 2024',
-  },
-  {
-    id: 3,
-    username: 'CitizenC',
-    text: 'Concerned about misuse of data without consent.',
-    date: '18 Oct 2024',
-  },
-  {
-    id: 4,
-    username: 'CitizenD',
-    text: 'Concerned about misuse of data without consent.',
-    date: '18 Oct 2024',
-  },
-];
 
 const CommentPage = () => {
   const navigate = useNavigate();
-  const [comments, setComments] = useState(mockComments);
+  const { slug } = useParams();
+
+  const [bill, setBill] = useState(null);
+  const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
+
+  useEffect(() => {
+    getBillDetail(slug).then(res => setBill(res.data));
+    getBillComments(slug).then(res => setComments(res.data));
+  }, [slug]);
 
   const handleSubmit = () => {
     if (!newComment.trim()) return;
 
-    const comment = {
-      id: Date.now(),
-      username: 'You',
-      text: newComment,
-      date: new Date().toLocaleDateString(),
-    };
-
-    setComments([comment, ...comments]);
-    setNewComment('');
+    addComment(slug, newComment).then(() => {
+      setNewComment('');
+      getBillComments(slug).then(res => setComments(res.data));
+    });
   };
+
+  if (!bill) return <p>Loading...</p>;
 
   return (
     <div className="comment-page">
@@ -66,8 +42,8 @@ const CommentPage = () => {
           <FaArrowLeft /> Back
         </button>
 
-        <h1>{mockBill.title}</h1>
-        <p className="bill-description">{mockBill.description}</p>
+        <h1>{bill.title}</h1>
+        <p className="bill-description">{bill.full_text}</p>
       </div>
 
       {/* MAIN CONTENT */}
@@ -92,10 +68,12 @@ const CommentPage = () => {
             <div key={comment.id} className="comment-card">
               <div className="comment-user">
                 <FaUserCircle />
-                <span>{comment.username}</span>
+                <span>{comment.user || "Citizen"}</span>
               </div>
               <p className="comment-text">“{comment.text}”</p>
-              <span className="comment-date">{comment.date}</span>
+              <span className="comment-date">
+                {new Date(comment.created_at).toLocaleDateString()}
+              </span>
             </div>
           ))}
         </div>

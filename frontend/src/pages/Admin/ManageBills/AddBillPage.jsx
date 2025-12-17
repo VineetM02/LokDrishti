@@ -1,60 +1,103 @@
 // src/pages/Admin/ManageBills/AddBillPage.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AdminFormLayout from '../../../components/AdminFormLayout/AdminFormLayout';
-import './ManageBills.css'; // Shared CSS
+import { toast } from 'react-hot-toast';
+import API from '../../../services/api';
+import './ManageBills.css';
 
 const AddBillPage = () => {
-    const [formData, setFormData] = useState({
-        title: '',
-        shortDescription: '',
-        fullText: '',
-        status: 'draft',
+  const navigate = useNavigate();
+
+  const [formData, setFormData] = useState({
+    title: '',
+    shortDescription: '',
+    fullText: '',
+    status: 'draft',
+  });
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
+  };
 
-    const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    };
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // API Call: POST to /api/admin/bills/
-        console.log('Adding New Bill:', formData);
-        alert('Bill added successfully!');
-        // On success, navigate back to AdminHomePage: navigate('/admin/home');
-    };
+  const payload = {
+    title: formData.title,
+    description: formData.shortDescription, // matches model
+    status: formData.status,               // REQUIRED FIELD
+  };
 
-    return (
-        <AdminFormLayout title="Add New Policy or Bill" action="add">
-            <form onSubmit={handleSubmit} className="manage-bill-form">
-                <div className="form-group">
-                    <label>Bill Title (Must be Unique)</label>
-                    <input type="text" name="title" value={formData.title} onChange={handleChange} required />
-                </div>
+  try {
+    await API.post("bills/", payload);
+    toast.success("Bill added successfully!");
+    navigate("/admin/home");
+  } catch (error) {
+    console.error("Add bill error:", error.response?.data);
+    toast.error("Failed to add bill");
+  }
+};
 
-                <div className="form-group">
-                    <label>Short Description/Explanation (For Users)</label>
-                    <textarea name="shortDescription" rows="3" value={formData.shortDescription} onChange={handleChange} required />
-                </div>
-                
-                <div className="form-group">
-                    <label>Full Policy Text (Detailed Content)</label>
-                    <textarea name="fullText" rows="6" value={formData.fullText} onChange={handleChange} required />
-                </div>
-                
-                <div className="form-group status-group">
-                    <label>Initial Status</label>
-                    <select name="status" value={formData.status} onChange={handleChange}>
-                        <option value="draft">Draft (Not visible to users)</option>
-                        <option value="active">Active (Visible to users)</option>
-                    </select>
-                </div>
-                
-                <button type="submit" className="form-submit-button add-button">
-                    Publish Bill
-                </button>
-            </form>
-        </AdminFormLayout>
-    );
+return (
+    <AdminFormLayout title="Add New Policy or Bill" action="add">
+      <form onSubmit={handleSubmit} className="manage-bill-form">
+
+        <div className="form-group">
+          <label>Bill Title (Must be Unique)</label>
+          <input
+            type="text"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Short Description / Explanation (For Users)</label>
+          <textarea
+            name="shortDescription"
+            rows="3"
+            value={formData.shortDescription}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Full Policy Text (Detailed Content)</label>
+          <textarea
+            name="fullText"
+            rows="6"
+            value={formData.fullText}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group status-group">
+          <label>Initial Status</label>
+          <select name="status" value={formData.status} onChange={handleChange}>
+            <option value="draft">Draft</option>
+            <option value="active">Active</option>
+            <option value="deleted">Deleted</option>
+          </select>
+        </div>
+
+        <button
+          type="submit"
+          className="form-submit-button add-button"
+        >
+          Publish Bill
+        </button>
+
+      </form>
+    </AdminFormLayout>
+  );
 };
 
 export default AddBillPage;

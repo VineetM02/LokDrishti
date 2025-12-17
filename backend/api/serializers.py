@@ -3,7 +3,10 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate
 from django.utils.text import slugify
 from  api.models import Bills,Comment
+from rest_framework import serializers
+from django.contrib.auth.models import User
 User=get_user_model()
+
 
 # added for user table information in db
 class UserSerializer(serializers.ModelSerializer):
@@ -13,28 +16,20 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True) # for safety sathi diley response yetan disat nahi
-    confirm_password = serializers.CharField(write_only=True) 
-    class Meta :
-        model=User
-        fields= ['username','email','password','confirm_password']
-    
-    # check is paasword and confirm_password match
-    def validate(self, data):
-        if data['password'] != data['confirm_password']:
-            raise serializers.ValidationError({"password": "Passwords do not match."})
-        return data
+    password = serializers.CharField(write_only=True)
 
-    #  this is for validation 
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password']
+
     def create(self, validated_data):
-        validated_data.pop('confirm_password')  # remove before creating user
-
         user = User.objects.create_user(
             username=validated_data['username'],
             email=validated_data['email'],
             password=validated_data['password']
         )
         return user   
+    
 # Login 
 class LoginSerializer(serializers.Serializer):
     identifier = serializers.CharField()  # can be username or email
@@ -55,20 +50,40 @@ class LoginSerializer(serializers.Serializer):
         data['user'] = user  # attach user object for use in the view
         return data
 
+
 class BillSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Bills
-        fields = '__all__'
-        extra_kwargs = {
-            'slug': {'required': False}
-        }
+        model = Bills
+        fields = [
+            "id",
+            "title",
+            "description",
+            "status",
+            "slug",
+            "created_at",
+            "updated_at",
+        ]
+        read_only_fields = ["slug", "created_at", "updated_at"]
 
     def create(self, validated_data):
-        if 'slug' not in validated_data:
-            validated_data['slug'] = slugify(validated_data['title'])
+        # Auto-generate slug from title
+        validated_data["slug"] = slugify(validated_data["title"])
         return super().create(validated_data)
+    
 
 class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.CharField(source="user.username", read_only=True)
+    bill_title = serializers.CharField(source="bill.title", read_only=True)
+
     class Meta:
-        model=Comment
-        fields='__all__'
+        model = Comment
+        fields = [
+            "id",
+            "bill",
+            "bill_title",
+            "user",
+            "text",
+            "sentiment",
+            "sentiment_confidence",
+            "created_at"
+        ]

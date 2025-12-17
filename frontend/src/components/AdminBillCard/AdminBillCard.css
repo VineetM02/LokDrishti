@@ -19,6 +19,7 @@
 }
 
 
+
 .admin-bill-details {
   display: flex;
   gap: 24px;
@@ -96,17 +97,17 @@
   font-weight: 600;
 }
 
-.bill-status.Active {
+.bill-status.active {
   background-color: #E7F6EC;
   color: #1A7F37;
 }
 
-.bill-status.Draft {
+.bill-status.draft {
   background-color: #FFF4E0;
   color: #A66A00;
 }
 
-.bill-status.Closed {
+.bill-status.deleted {
   background-color: #FDEAEA;
   color: #8B0000;
 }
